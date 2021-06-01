@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.android.politicalpreparedness.network.models.Address
 import java.util.Locale
 
-class DetailFragment : Fragment() {
+class RepresentativeFragment : Fragment() {
 
     companion object {
         //TODO: Add Constant for Location request
