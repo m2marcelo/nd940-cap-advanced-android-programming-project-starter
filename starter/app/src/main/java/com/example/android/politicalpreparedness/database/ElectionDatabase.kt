@@ -18,7 +18,7 @@ abstract class ElectionDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: ElectionDatabase? = null
 
-        fun getInstance(context: Context): ElectionDatabase {
+        fun getDatabase(context: Context): ElectionDatabase {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
