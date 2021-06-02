@@ -5,14 +5,29 @@ import android.widget.ImageView
 import android.widget.Spinner
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.android.politicalpreparedness.R
+import com.example.android.politicalpreparedness.representative.model.Representative
 
 @BindingAdapter("profileImage")
 fun fetchImage(view: ImageView, src: String?) {
     src?.let {
         val uri = src.toUri().buildUpon().scheme("https").build()
-        //TODO: Add Glide call to load image and circle crop - user ic_profile as a placeholder and for errors.
+        //DONE: Add Glide call to load image and circle crop - user ic_profile as a placeholder and for errors.
+        Glide.with(view.context)
+            .load(uri)
+            .apply(RequestOptions()
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile))
+            .circleCrop()
+            .into(view)
     }
+
 }
+
 
 @BindingAdapter("stateValue")
 fun Spinner.setNewValue(value: String?) {
@@ -23,6 +38,17 @@ fun Spinner.setNewValue(value: String?) {
     }
     if (position >= 0) {
         setSelection(position)
+    }
+}
+
+
+@BindingAdapter("representatives")
+fun bindRepresentatives(recyclerView: RecyclerView, representativesLiveData: LiveData<List<Representative>>?) {
+    representativesLiveData?.value?.let { representatives  ->
+        (recyclerView.adapter as RepresentativeListAdapter).apply {
+            this.submitList(representatives)
+        }
+
     }
 }
 
