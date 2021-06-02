@@ -41,7 +41,7 @@ fun Spinner.setNewValue(value: String?) {
     }
 }
 
-
+/*
 @BindingAdapter("representatives")
 fun bindRepresentatives(recyclerView: RecyclerView, representativesLiveData: LiveData<List<Representative>>?) {
     representativesLiveData?.value?.let { representatives  ->
@@ -51,6 +51,7 @@ fun bindRepresentatives(recyclerView: RecyclerView, representativesLiveData: Liv
 
     }
 }
+*/
 
 inline fun <reified T> toTypedAdapter(adapter: ArrayAdapter<*>): ArrayAdapter<T>{
     return adapter as ArrayAdapter<T>

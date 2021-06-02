@@ -38,7 +38,8 @@
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_title"
-            android:text="address line 1"/>
+            android:hint="address line 1"
+            android:text="@={viewModel.address.line1}"/>
 
         <!-- TODO: Add visual styling and content -->
         <EditText
@@ -49,7 +50,8 @@
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/address_line_1"
-            android:text="address line 2"/>
+            android:hint="address line 2"
+            android:text="@={viewModel.address.line2}"/>
 
         <!-- TODO: Add visual styling and content -->
         <EditText
@@ -61,7 +63,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/state"
             app:layout_constraintTop_toBottomOf="@id/address_line_2"
-            android:text="city"/>
+            android:hint="city"
+            android:text="@={viewModel.address.city}"/>
 
         <!-- TODO: Add default values from provided resources  -->
         <!-- TODO: Add data binding value -->
@@ -88,7 +91,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="@id/city"
             app:layout_constraintTop_toBottomOf="@id/city"
-            android:text="zip"/>
+            android:hint="zip"
+            android:text="@={viewModel.address.zip}"/>
 
         <!-- TODO: Add visual styling and label -->
         <Button
