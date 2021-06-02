@@ -35,10 +35,8 @@ class RepresentativeFragment : Fragment() {
 
     //DONE: Declare ViewModel
     private val viewModel: RepresentativeViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        val viewModelFactory =  RepresentativeViewModel.Factory(activity.application)
+        val application = requireNotNull(this.activity).application
+        val viewModelFactory =  RepresentativeViewModel.Factory(application)
         ViewModelProvider(this,viewModelFactory)
             .get(RepresentativeViewModel::class.java)
     }

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 class ElectionsViewModelFactory(val app: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ElectionsViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
             return ElectionsViewModel(app) as T
         }
         throw IllegalArgumentException("Unable to construct viewmodel")

@@ -13,7 +13,7 @@ class VoterInfoViewModel(application: Application) : AndroidViewModel(applicatio
 
     val voterInfo = electionsRepository.voterInfo
 
-    var intentUrl = MutableLiveData<String>()
+    var Url = MutableLiveData<String>()
 
     private val electionId = MutableLiveData<Int>()
     val election = electionId.switchMap { id ->
@@ -26,20 +26,21 @@ class VoterInfoViewModel(application: Application) : AndroidViewModel(applicatio
         electionId.value = id
     }
 
-    fun getVoterInfo(electionId: Int, address: String) =
-        viewModelScope.launch {
-            electionsRepository.getVoterInfo(electionId, address)
-        }
-
-    fun toggleSaveElection(election: Election) {
+    fun SaveElection(election: Election) {
         election.isSaved = !election.isSaved
         viewModelScope.launch {
             electionsRepository.insertElection(election)
         }
     }
 
-    fun setIntentUrl(url: String) {
-        intentUrl.value = url
+    fun getVoterInfo(electionId: Int, address: String) =
+        viewModelScope.launch {
+            electionsRepository.getVoterInfo(electionId, address)
+        }
+
+
+    fun intentUrl(url: String) {
+        Url.value = url
     }
 
 

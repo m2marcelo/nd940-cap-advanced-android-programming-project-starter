@@ -21,11 +21,8 @@ class ElectionsFragment: Fragment() {
     //DONE: Declare ViewModel
     //DONE: Add ViewModel values and create ViewModel
     private val viewModel: ElectionsViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-
-        val viewModelFactory = ElectionsViewModelFactory(activity.application)
+        val application = requireNotNull(this.activity).application
+        val viewModelFactory = ElectionsViewModelFactory(application)
         ViewModelProvider(this, viewModelFactory)
             .get(ElectionsViewModel::class.java)
 
@@ -56,22 +53,16 @@ class ElectionsFragment: Fragment() {
             )
         })
 
+        binding.upcomingElectionsRecyclerView.adapter = upcomingElectionListAdapter
+
         savedElectionListAdapter = ElectionListAdapter(ElectionListener {
             findNavController().navigate(
                 ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(it)
             )
         })
 
-        binding.upcomingElectionsRecyclerView.adapter = upcomingElectionListAdapter
         binding.savedElectionsRecyclerView.adapter = savedElectionListAdapter
 
-        return binding.root
-
-    }
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         viewModel.upcomingElections.observe(viewLifecycleOwner, Observer { elections ->
             elections?.apply {
@@ -84,6 +75,7 @@ class ElectionsFragment: Fragment() {
                 savedElectionListAdapter.elections = elections
             }
         })
-    }
 
+        return binding.root
+    }
 }

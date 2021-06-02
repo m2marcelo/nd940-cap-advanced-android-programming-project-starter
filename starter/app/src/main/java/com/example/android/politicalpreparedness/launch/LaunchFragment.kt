@@ -1,10 +1,8 @@
 package com.example.android.politicalpreparedness.launch
 import android.os.Bundle
 import android.view.*
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentLaunchBinding
 
 class LaunchFragment : Fragment() {
@@ -14,7 +12,7 @@ class LaunchFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_launch, container, false)
+        binding = FragmentLaunchBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
         binding.representativesButton.setOnClickListener { navToRepresentatives() }
@@ -23,7 +21,6 @@ class LaunchFragment : Fragment() {
         }
         return binding.root
     }
-
 
     private fun navToElections() {
         this.findNavController().navigate(LaunchFragmentDirections.actionLaunchFragmentToElectionsFragment())

@@ -21,11 +21,12 @@ class VoterInfoFragment : Fragment() {
      * lazy. This requires that viewModel not be referenced before onActivityCreated, which we
      * do in this Fragment.
      */
+
+    //DONE: Add ViewModel values and create ViewModel
     private val viewModel: VoterInfoViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        val viewModelFactory = VoterInfoViewModelFactory(activity.application)
+
+        val application = requireNotNull(this.activity).application
+        val viewModelFactory = VoterInfoViewModelFactory(application)
         ViewModelProvider(this, viewModelFactory)
             .get(VoterInfoViewModel::class.java)
     }
@@ -34,6 +35,8 @@ class VoterInfoFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+
+        //DONE: Add binding values
         val binding: FragmentVoterInfoBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_voter_info,
@@ -42,13 +45,6 @@ class VoterInfoFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
-        return binding.root
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         val election = args.argElection
 
@@ -60,11 +56,11 @@ class VoterInfoFragment : Fragment() {
             viewModel.getVoterInfo(args.argElection.id, "${args.argElection.division.country} - ${args.argElection.division.state}")
         }
 
-        viewModel.intentUrl.observe(viewLifecycleOwner, Observer {
+        viewModel.Url.observe(viewLifecycleOwner, Observer {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
             startActivity(intent)
         })
 
+        return binding.root
     }
-
 }

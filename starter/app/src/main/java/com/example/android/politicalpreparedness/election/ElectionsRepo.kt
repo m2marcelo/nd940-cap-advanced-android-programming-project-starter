@@ -14,24 +14,11 @@ import java.lang.Exception
 
 class ElectionsRepo(private val database: ElectionDatabase) {
 
-    val elections: LiveData<List<Election>> = database.electionDao.getElections()
-
+    val elections: LiveData<List<Election>> = database.electionDao.getAllElections()
     val voterInfo =  MutableLiveData<VoterInfoResponse>()
     val representatives =  MutableLiveData<RepresentativeResponse>()
 
-    suspend fun refreshElections() {
-        try {
-            withContext(Dispatchers.IO) {
-                val electionResponse = CivicsApi.retrofitService.getElectionsAsync().await()
-                database.electionDao.insertElections(electionResponse.elections)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
-
-    fun getElection(id: Int) = database.electionDao.getElection(id)
+    fun getElection(id: Int) = database.electionDao.getElectionById(id)
 
     suspend fun getVoterInfo(electionId: Int, address: String) {
         try {
@@ -49,6 +36,19 @@ class ElectionsRepo(private val database: ElectionDatabase) {
         withContext(Dispatchers.IO) {
             database.electionDao.insertElection(election)
         }
+    }
+
+
+    suspend fun refreshElections() {
+        try {
+            withContext(Dispatchers.IO) {
+                val electionResponse = CivicsApi.retrofitService.getElectionsAsync().await()
+                database.electionDao.insertElections(electionResponse.elections)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     val savedElections: LiveData<List<Election>> = database.electionDao.getSavedElections()
