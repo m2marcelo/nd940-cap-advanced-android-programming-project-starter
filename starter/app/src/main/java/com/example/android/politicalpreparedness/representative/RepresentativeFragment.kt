@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -111,6 +112,12 @@ class RepresentativeFragment : Fragment() {
                     // At the same time, respect the user's decision. Don't link to
                     // system settings in an effort to convince the user to change
                     // their decision.
+                    var text = "To use this feature, the app need permissions from the user, " +
+                            "which was not granted yet. If you change your mind, please change " +
+                            "the permissions for this app."
+                    val duration = Toast.LENGTH_LONG
+                    val toast = Toast.makeText(requireContext(), text, duration)
+                    toast.show()
                 }
                 return
             }
@@ -151,7 +158,6 @@ class RepresentativeFragment : Fragment() {
         locationClient.lastLocation
             .addOnSuccessListener { location ->
                 if (location != null) {
-//DONE: The geoCodeLocation method is a helper function to change the lat/long location to a human readable street address
                     val address = geoCodeLocation(location)
                     viewModel.address.value = address
 
@@ -170,6 +176,12 @@ class RepresentativeFragment : Fragment() {
         val geocode = Geocoder(context, Locale.getDefault())
         return geocode.getFromLocation(location.latitude, location.longitude, 1)
             .map { address ->
+                if (address.countryCode != "US") {
+                    var text = "Unfortunately this API is for US only!"
+                    val duration = Toast.LENGTH_SHORT
+                    val toast = Toast.makeText(requireContext(), text, duration)
+                    toast.show()
+                }
                 Address(address.thoroughfare, address.subThoroughfare, address.locality, address.adminArea, address.postalCode)
             }
             .first()
@@ -179,6 +191,4 @@ class RepresentativeFragment : Fragment() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view!!.windowToken, 0)
     }
-
-
 }
