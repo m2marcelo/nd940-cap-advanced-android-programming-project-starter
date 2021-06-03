@@ -43,6 +43,7 @@ class ElectionsRepo(private val database: ElectionDatabase) {
         try {
             withContext(Dispatchers.IO) {
                 val electionResponse = CivicsApi.retrofitService.getElectionsAsync().await()
+                Log.d("ELECTION RESPONSE","IS: " + electionResponse)
                 database.electionDao.insertElections(electionResponse.elections)
             }
         } catch (e: Exception) {
