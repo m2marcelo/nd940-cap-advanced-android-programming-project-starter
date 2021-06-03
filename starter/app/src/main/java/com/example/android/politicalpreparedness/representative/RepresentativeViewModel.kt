@@ -1,6 +1,7 @@
 package com.example.android.politicalpreparedness.representative
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Address
@@ -17,7 +18,9 @@ class RepresentativeViewModel(application: Application) : AndroidViewModel(appli
 
     //DONE: Create function to fetch representatives from API from a provided address
     fun getRepresentatives() {
+        Log.d("getRepresentatives view model", "verifying address.value" + address.value)
         if (address.value != null) {
+            Log.d("getRepresentatives view model", "address.value = " + address.value)
             viewModelScope.launch {
                 try {
                     val (offices, officials) = CivicsApi.retrofitService.getRepresentativesAsync(address.value!!.toFormattedString()).await()

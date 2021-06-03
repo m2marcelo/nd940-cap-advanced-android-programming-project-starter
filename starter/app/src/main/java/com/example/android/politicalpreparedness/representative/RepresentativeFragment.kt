@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,6 +74,7 @@ class RepresentativeFragment : Fragment() {
         binding.buttonSearch.setOnClickListener {
             hideKeyboard()
             viewModel.getRepresentatives()
+            Log.d("GETREPRESENTATIVE", "SEARCH")
         }
 
         //DONE: Define and assign Representative adapter
