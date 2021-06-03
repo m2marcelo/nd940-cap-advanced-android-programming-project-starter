@@ -4,8 +4,8 @@ data class Address (
         var line1: String? = null,
         var line2: String? = null,
         var city: String? = null,
-        var state: String? = null,
-        var zip: String? = null
+        var state: String,
+        var zip: String
 ) {
     fun toFormattedString(): String {
         var output = line1.plus("\n")

@@ -27,7 +27,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Election Name" />
+            tools:text="@string/election_label" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/election_date"
@@ -38,7 +38,7 @@
             android:textColor="@color/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/election_name"
-            tools:text="Election Date" />
+            tools:text="@string/election_date_label" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

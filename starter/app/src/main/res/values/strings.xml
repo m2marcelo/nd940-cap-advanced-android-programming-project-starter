@@ -5,5 +5,26 @@
     <!-- TODO: Add necessary string values -->
     <string name="follow">Follow Election</string>
     <string name="unfollow">Unfollow Election</string>
+    <string name="election_label">Election Name</string>
+    <string name="election_date_label">Election Date</string>
+    <string name="upcoming_label">Upcoming Elections</string>
+    <string name="saved_elections_label">Saved Elections</string>
+    <string name="find_my_representative_label">Find My Representative</string>
+    <string name="search_label">Search Representative</string>
+    <string name="hint_addess_1">address line 1</string>
+    <string name="hint_address_2">address line 2</string>
+    <string name="hint_city">city</string>
+    <string name="hint_zip">zip</string>
+    <string name="search">search</string>
+    <string name="use_my_location">Use My Location</string>
+    <string name="representatives">Representatives</string>
+    <string name="elecation_date">16 August 2022</string>
+    <string name="election_information">Election Information</string>
+    <string name="voting_location">Voting Location</string>
+    <string name="ballot_info">Ballot Information</string>
+    <string name="correspondence_address">Corresponding address</string>
+    <string name="follow_election">Follow Election</string>
+    <string name="permission_info">To use this feature, the app need permissions from the user, which was not granted yet. If you change your mind, please change the permissions for this app.</string>
+    <string name="wrong_country">Unfortunately this API is for US only!</string>
 
 </resources>

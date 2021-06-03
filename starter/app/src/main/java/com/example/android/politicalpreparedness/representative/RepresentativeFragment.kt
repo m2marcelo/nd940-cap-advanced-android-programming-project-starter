@@ -112,9 +112,7 @@ class RepresentativeFragment : Fragment() {
                     // At the same time, respect the user's decision. Don't link to
                     // system settings in an effort to convince the user to change
                     // their decision.
-                    var text = "To use this feature, the app need permissions from the user, " +
-                            "which was not granted yet. If you change your mind, please change " +
-                            "the permissions for this app."
+                    var text = R.string.permission_info
                     val duration = Toast.LENGTH_LONG
                     val toast = Toast.makeText(requireContext(), text, duration)
                     toast.show()
@@ -177,7 +175,7 @@ class RepresentativeFragment : Fragment() {
         return geocode.getFromLocation(location.latitude, location.longitude, 1)
             .map { address ->
                 if (address.countryCode != "US") {
-                    var text = "Unfortunately this API is for US only!"
+                    var text = R.string.wrong_country
                     val duration = Toast.LENGTH_SHORT
                     val toast = Toast.makeText(requireContext(), text, duration)
                     toast.show()
